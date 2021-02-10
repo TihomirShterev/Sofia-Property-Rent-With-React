@@ -1,7 +1,10 @@
 import React from 'react';
 import styles from './index.module.css';
+import {
+  Link
+} from 'react-router-dom';
 
-const Header = ({ href }) => {
+const Header = () => {
   return (
     <header>
       <div className={styles["mini-navbar-wrap"]}>
@@ -11,16 +14,16 @@ const Header = ({ href }) => {
         <div className={styles["mini-navbar"]}>
           <ul>
             <li>
-              <a href={href}>PROFILE</a>
+              <Link to="/user/profile">PROFILE</Link>
             </li>
             <li>
-              <a href={href}>LOGOUT</a>
+              <Link to="/user/logout">LOGOUT</Link>
             </li>
             <li>
-              <a href={href}>LOGIN</a>
+              <Link to="/user/login">LOGIN</Link>
             </li>
             <li>
-              <a href={href}>REGISTER</a>
+              <Link to="/user/register">REGISTER</Link>
             </li>
           </ul>
         </div>
@@ -28,16 +31,28 @@ const Header = ({ href }) => {
       <nav className={styles["nav-header"]}>
         <ul>
           <li>
-            <a href={href}>HOME</a>
+            <Link to="/home">HOME</Link>
           </li>
           <li>
-            <a href={href}>OFFERS</a>
+            <Link to="/item">OFFERS</Link>
           </li>
           <li>
-            <a href={href}>CREATE OFFER</a>
+            <Link to="/item/create">CREATE OFFER</Link>
           </li>
         </ul>
       </nav>
+      {/* <div className={styles["mini-navbar"]}>
+          <Link to={href}>PROFILE</Link>
+          <Link to={href}>LOGOUT</Link>
+          <Link to={href}>LOGIN</Link>
+          <Link to={href}>REGISTER</Link>
+        </div>
+      </div>
+      <nav className={styles["nav-header"]}>
+        <Link to={href}>HOME</Link>
+        <Link to={href}>OFFERS</Link>
+        <Link to={href}>CREATE OFFER</Link>
+      </nav> */}
     </header>
   );
 };
