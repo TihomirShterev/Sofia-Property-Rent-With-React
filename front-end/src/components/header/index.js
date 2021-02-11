@@ -4,7 +4,10 @@ import {
   Link
 } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ userId }) => {
+  // const currentUser = `/user/profile/${userId}`;
+  // console.log(userId);
+
   return (
     <header>
       <div className={styles["mini-navbar-wrap"]}>
@@ -14,7 +17,7 @@ const Header = () => {
         <div className={styles["mini-navbar"]}>
           <ul>
             <li>
-              <Link to="/user/profile">PROFILE</Link>
+              <Link to={`/user/profile/${userId}`}>PROFILE</Link>
             </li>
             <li>
               <Link to="/user/logout">LOGOUT</Link>
@@ -31,7 +34,7 @@ const Header = () => {
       <nav className={styles["nav-header"]}>
         <ul>
           <li>
-            <Link to="/home">HOME</Link>
+            <Link to="/">HOME</Link>
           </li>
           <li>
             <Link to="/item">OFFERS</Link>
