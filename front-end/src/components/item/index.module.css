@@ -1,0 +1,72 @@
+.item-container a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.item-container span {
+  font-weight: bold;
+}
+
+.item-container h2, p {
+  padding: 0.3em 0 0.2em;
+  margin: 0;
+}
+
+.item-name-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3em 0.5em;
+  border: 3px solid rgb(211, 174, 10);
+  border-radius: 1.3em;
+  font-size: 0.8em;
+  margin-top: 1em;
+}
+
+.item-title {
+  padding: 0;
+}
+
+.item-name {
+  width: 100%;
+}
+
+.columns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.7rem;
+}
+
+img {
+  height: 250px;
+  width: 310px;
+  /* margin: 20px 49px; */
+  border: solid;
+  border-radius: 3%;
+}
+
+.peopleWhoIncremented {
+  text-align: right;
+  flex-basis: 25%;
+}
+
+.peopleWhoIncremented button {
+  padding: 0.2rem 0.5rem;
+  border: none;
+  border-radius: 0.3rem;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+}
+
+.increment {
+  background-color: green;
+}
+
+.decrement {
+  background-color: red;
+}
+
+time {
+  font-weight: bold;
+}
