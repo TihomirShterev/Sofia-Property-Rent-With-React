@@ -1,0 +1,61 @@
+/* welcome component */
+
+.welcome {
+  padding: 0.3em 0.5em;
+  /* border: 1px solid #999;
+  border-radius: 0.3em; */
+  font-size: 0.8em;
+  margin-top: 1em;
+}
+
+.welcome h3 {
+  background-color:  rgb(211, 174, 10);
+  border-radius: 0.3em;
+  /* width: 100%; */
+  padding: 0.3em 1em;
+  text-align: center;
+}
+
+.welcome p {
+  padding: 1em;
+  border-bottom: 1px solid #999;
+  font-style: normal;
+  font-size: x-large;
+  font-weight: 600;
+  font-family: fangsong;
+  text-align: center;
+}
+
+.welcome a {
+  color: white;
+  text-decoration: none;
+  background-color: rgb(211, 174, 10);
+  border: none;
+  border-radius: 0.3em;
+  padding: 0.5em 5.2em;
+  margin: 1em;
+}
+
+.welcome a:hover {
+  cursor: pointer;
+}
+
+.welcome ul {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0;
+  margin: 1em;
+}
+
+.welcome li {
+  list-style: none;
+}
+
+img {
+  height: 305px;
+  width: 500px;
+  border: solid #999;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
