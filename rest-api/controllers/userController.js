@@ -23,13 +23,14 @@ function register(req, res, next) {
       // console.log(createdUser);
 
       const token = utils.jwt.createToken({ id: createdUser._id });
-      if (process.env.NODE_ENV === 'production') {
-        res.cookie(authCookieName, token, { httpOnly: true, sameSite: 'none', secure: true })
-      } else {
-        res.cookie(authCookieName, token, { httpOnly: true })
-      }
-      res.status(200)
-        .send(createdUser);
+      res.header("Authorization", token).send(createdUser);
+      // if (process.env.NODE_ENV === 'production') {
+      //   res.cookie(authCookieName, token, { httpOnly: true, sameSite: 'none', secure: true })
+      // } else {
+      //   res.cookie(authCookieName, token, { httpOnly: true })
+      // }
+      // res.status(200)
+      //   .send(createdUser);
     })
     .catch(err => {
       if (err.name === 'MongoError' && err.code === 11000) {
@@ -43,6 +44,44 @@ function register(req, res, next) {
       }
       next(err);
     });
+}
+
+function verifyLogin(req, res, next) {
+  // console.log(req.cookies);
+  // const token = req.cookies[config.authCookieName] || '';
+  const token = req.body.token || '';
+
+  Promise.all([
+    utils.jwt.verifyToken(token),
+    tokenBlacklistModel.findOne({ token })
+  ])
+    .then(([data, blacklistToken]) => {
+      if (blacklistToken) { return Promise.reject(new Error('blacklisted token')) }
+
+      userModel.findById(data.id)
+        .then((user) => {
+          // req.user = user;
+          // req.isLogged = true;
+          // next();
+          return res.send({
+            status: true,
+            user
+          }); // means we're logged, if user is found
+        });
+    })
+    .catch(err => {
+      if (!redirectAuthenticated) { next(); return; }
+
+      if (['token expired', 'blacklisted token', 'jwt must be provided'].includes(err.message)) {
+        res.status(401).send('UNAUTHORIZED!');
+        return;
+      }
+
+      // next(err);
+      res.send({
+        status: false
+      }); // if anything's wrong
+    })
 }
 
 function login(req, res, next) {
@@ -63,13 +102,14 @@ function login(req, res, next) {
 
       const token = utils.jwt.createToken({ id: user._id });
 
-      if (process.env.NODE_ENV === 'production') {
-        res.cookie(authCookieName, token, { httpOnly: true, sameSite: 'none', secure: true })
-      } else {
-        res.cookie(authCookieName, token, { httpOnly: true })
-      }
-      res.status(200)
-        .send(user);
+      res.header("Authorization", token).send(user);
+      // if (process.env.NODE_ENV === 'production') {
+      //   res.cookie(authCookieName, token, { httpOnly: true, sameSite: 'none', secure: true })
+      // } else {
+      //   res.cookie(authCookieName, token, { httpOnly: true })
+      // }
+      // res.status(200)
+      //   .send(user);
     })
     .catch(next);
 }
@@ -105,8 +145,9 @@ function getProfile(req, res, next) {
 }
 
 module.exports = {
-  login,
   register,
+  verifyLogin,
+  login,
   logout,
   getProfile,
 };

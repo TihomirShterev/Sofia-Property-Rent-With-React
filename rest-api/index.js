@@ -1,5 +1,5 @@
 global.__basedir = __dirname;
-require('dotenv').config()
+require('dotenv').config();
 const dbConnector = require('./config/db');
 const apiRouter = require('./router');
 const cors = require('cors');
@@ -13,8 +13,9 @@ dbConnector()
     require('./config/express')(app);
 
     app.use(cors({
-      origin: config.origin,
-      credentials: true
+      // origin: config.origin,
+      // credentials: true,
+      exposedHeaders: 'Authorization'
     }));
 
     app.use('/api', apiRouter);
