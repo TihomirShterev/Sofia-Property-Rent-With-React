@@ -1,7 +1,6 @@
+import React, { Component } from 'react';
 import Layout from '../../components/layout';
 import styles from './index.module.css';
-
-import React, { Component } from 'react';
 
 class ProfilePage extends Component {
   constructor(props) {
@@ -33,7 +32,7 @@ class ProfilePage extends Component {
       email: user.email,
       myItems: user.myItems
     });
-  };
+  }
 
   render() {
     const {
@@ -65,7 +64,7 @@ class ProfilePage extends Component {
         </div>
       </Layout>
     );
-  };
+  }
 }
 
 export default ProfilePage;

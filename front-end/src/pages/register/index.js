@@ -4,6 +4,7 @@ import styles from './index.module.css';
 import {
   Link
 } from 'react-router-dom';
+import UserContext from '../../Context';
 
 class RegisterPage extends Component {
   constructor(props) {
@@ -12,11 +13,17 @@ class RegisterPage extends Component {
     this.state = {
       email: "",
       password: "",
-      rePassword: ""
+      rePassword: "",
+      emailError: false,
+      passwordError: false,
+      rePasswordError: false,
+      emptyFieldsError: false
     };
   }
 
-  onChange = (event, type) => {
+  static contextType = UserContext;
+
+  handleChange = (event, type) => {
     const newState = {};
     // console.log(event);
     newState[type] = event.target.value;
@@ -24,18 +31,115 @@ class RegisterPage extends Component {
     this.setState(newState);
   };
 
+  handleSubmit = async (event) => {
+    event.preventDefault(); // so page doesn't reload
 
-
-  render() {
     const {
       email,
       password,
       rePassword
     } = this.state;
 
+    // console.log(this.context);
+
+    // custom validations
+    if (0 < email.length && !email.match(/^[a-zA-Z0-9.-]{6,}@\w+.(com|bg)$/)) {
+      this.setState({
+        emailError: true
+      });
+    } else {
+      this.setState({
+        emailError: false
+      });
+    }
+
+    if (0 < password.length && password.length < 6) {
+      this.setState({
+        passwordError: true
+      });
+    } else {
+      this.setState({
+        passwordError: false
+      });
+    }
+
+    if (0 < rePassword.length && rePassword !== password) {
+      this.setState({
+        rePasswordError: true
+      });
+    } else {
+      this.setState({
+        rePasswordError: false
+      });
+    }
+
+    if (!email || !password || !rePassword) {
+      this.setState({
+        emptyFieldsError: true
+      });
+    } else {
+      this.setState({
+        emptyFieldsError: false
+      });
+    }
+
+    // query
+    try {
+      const promise = await fetch('http://localhost:3001/api/users/register', {
+        method: 'POST',
+        body: JSON.stringify({
+          email,
+          password,
+          rePassword
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const authToken = promise.headers.get('Authorization'); // #rest-api/index.js
+      document.cookie = `auth-cookie=${authToken}`; // we save the token in the cookie (#rest-api/app-config),
+      // and when we log in, we'll already have the cookie in DevTools/Application 
+      const response = await promise.json();
+      // console.log(response);
+
+      // passwords match needed, so it doesn't log in w/o rePassword
+      if (response.email && authToken && rePassword === password) {
+        // console.log('Yay!');
+        this.context.logIn({
+          email: response.email,
+          id: response._id
+        });
+        this.props.history.push('/'); // if all good, we redirect to homePage
+      } else {
+        console.log('Error');
+      }
+
+    } catch (err) {
+      console.log('Error', err);
+    }
+  };
+
+  render() {
+    const {
+      email,
+      password,
+      rePassword,
+      emailError,
+      passwordError,
+      rePasswordError,
+      emptyFieldsError
+    } = this.state;
+
+    const emailErrorMessage = emailError ? 'Please enter a valid email' : null;
+    const passwordErrorMessage = passwordError ? 'Please enter a valid password consisting at least 6 characters' : null;
+    const rePasswordErrorMessage = rePasswordError ? 'Please enter a matching password' : null;
+    const emptyFieldsErrorMessage = emptyFieldsError ? 'Please fill all fields above' : null;
+
+
     return (
       <Layout>
-        <form className={styles.register}>
+        <form className={styles.register} onSubmit={this.handleSubmit}>
           <fieldset>
             <h2>Registration Form</h2>
 
@@ -44,53 +148,50 @@ class RegisterPage extends Component {
               <input
                 type="text"
                 name="email"
-                id="email" value={email}
-                onChange={(e) => this.onChange(e, 'email')}
+                id="email"
+                value={email}
+                onChange={(e) => this.handleChange(e, 'email')}
                 placeholder="pesho.peshev@gmail.com"
               />
             </p>
-            {/* <p className={styles.error}>
-              Email is required!
-            </p>
             <p className={styles.error}>
-              Email is not valid!
-            </p> */}
+              {emailErrorMessage}
+            </p>
 
             <p className={styles["field field-icon"]}>
               <label htmlFor="password"><span><i className="fas fa-lock"></i></span></label>
               <input
                 type="password"
                 name="password"
-                id="password" value={password}
-                onChange={(e) => this.onChange(e, 'password')}
+                id="password"
+                value={password}
+                onChange={(e) => this.handleChange(e, 'password')}
                 placeholder="******"
               />
             </p>
-            {/* <p className={styles.error}>
-              Password is required!
-            </p>
             <p className={styles.error}>
-              Password must be at least 5 characters!
-            </p> */}
+              {passwordErrorMessage}
+            </p>
 
             <p className={styles["field field-icon"]}>
               <label htmlFor="rePassword"><span><i className="fas fa-lock"></i></span></label>
               <input
                 type="password"
                 name="rePassword"
-                id="rePassword" value={rePassword}
-                onChange={(e) => this.onChange(e, 'rePassword')}
+                id="rePassword"
+                value={rePassword}
+                onChange={(e) => this.handleChange(e, 'rePassword')}
                 placeholder="******"
               />
             </p>
-            {/* <p className={styles.error}>
-              Password is required!
-            </p>
             <p className={styles.error}>
-              Repeat Password does not match password!
-            </p> */}
+              {rePasswordErrorMessage}
+            </p>
 
-            <button>Create Account</button>
+            <p className={styles.error}>
+              {emptyFieldsErrorMessage}
+            </p>
+            <button type="submit">Create Account</button>
 
             <p className={styles["text-center"]}>
               Already registered?

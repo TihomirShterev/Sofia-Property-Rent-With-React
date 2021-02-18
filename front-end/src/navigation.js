@@ -1,9 +1,11 @@
-import React, { Suspense } from 'react';
+import React, { Component, Suspense } from 'react';
 import {
   BrowserRouter,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
+import UserContext from './Context';
 // import HomePage from './pages/home';
 // import RegisterPage from './pages/register';
 // import LoginPage from './pages/login';
@@ -38,23 +40,38 @@ const LazyItemsPage = React.lazy(() => import('./pages/items'));
 const LazyCreatePage = React.lazy(() => import('./pages/create'));
 const LazyNotFoundPage = React.lazy(() => import('./pages/not-found'));
 
-const LazyNavigation = () => {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Suspense fallback={<h1>Loading.....</h1>}>
-          <Route path="/" exact component={LazyHomePage} />
-          <Route path="/user/register" component={LazyRegisterPage} />
-          <Route path="/user/login" component={LazyLoginPage} />
-          <Route path="/user/profile/:userId" component={LazyProfilePage} />
-          <Route path="/item" exact component={LazyItemsPage} />
-          <Route path="/item/create" component={LazyCreatePage} />
-          {/* when lazy, error page needs path="" to work */}
-          <Route path="" component={LazyNotFoundPage} />
-        </Suspense>
-      </Switch>
-    </BrowserRouter>
-  );
-};
+class LazyNavigation extends Component {
+
+  static contextType = UserContext;
+
+  render() {
+    const {
+      loggedIn
+    } = this.context;
+
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Suspense fallback={<h1>Loading.....</h1>}>
+            <Route path="/" exact component={LazyHomePage} />
+            <Route path="/user/register" component={LazyRegisterPage} />
+            <Route path="/user/login" component={LazyLoginPage} />
+            {/* FE auth "guard" */}
+            {loggedIn
+              ? <Route path="/user/logout" />
+              : <Redirect to="/" exact component={LazyHomePage} />
+            }
+            <Route path="/user/profile/:userId" component={LazyProfilePage} />
+            <Route path="/item" exact component={LazyItemsPage} />
+            <Route path="/item/create" component={LazyCreatePage} />
+            {/* ??? double render */}
+            {/* <Route path="" component={LazyNotFoundPage} /> */}
+          </Suspense>
+        </Switch>
+      </BrowserRouter>
+    );
+  }
+
+}
 
 export default LazyNavigation;
