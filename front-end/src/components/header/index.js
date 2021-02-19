@@ -56,18 +56,12 @@ class Header extends Component {
             <li>
               <Link to="/">HOME</Link>
             </li>
-            {loggedIn
-              ? <>
-                <li>
-                  <Link to="/item">OFFERS</Link>
-                </li>
-                <li>
-                  <Link to="/item/create">CREATE OFFER</Link>
-                </li>
-              </>
-              : <></>
-            }
-
+            <li>
+              <Link to="/item">OFFERS</Link>
+            </li>
+            <li>
+              <Link to="/item/create">CREATE OFFER</Link>
+            </li>
           </ul>
         </nav>
       </header>

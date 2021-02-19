@@ -51,23 +51,18 @@ class LazyNavigation extends Component {
 
     return (
       <BrowserRouter>
-        <Switch>
-          <Suspense fallback={<h1>Loading.....</h1>}>
+        <Suspense fallback={<h1>Loading.....</h1>}>
+          <Switch>
             <Route path="/" exact component={LazyHomePage} />
             <Route path="/user/register" component={LazyRegisterPage} />
             <Route path="/user/login" component={LazyLoginPage} />
-            {/* FE auth "guard" */}
-            {loggedIn
-              ? <Route path="/user/logout" />
-              : <Redirect to="/" exact component={LazyHomePage} />
-            }
+            <Route path="/user/logout" render={() => loggedIn ? null : <Redirect to="/" />} />
             <Route path="/user/profile/:userId" component={LazyProfilePage} />
             <Route path="/item" exact component={LazyItemsPage} />
             <Route path="/item/create" component={LazyCreatePage} />
-            {/* ??? double render */}
-            {/* <Route path="" component={LazyNotFoundPage} /> */}
-          </Suspense>
-        </Switch>
+            <Route component={LazyNotFoundPage} />
+          </Switch>
+        </Suspense>
       </BrowserRouter>
     );
   }

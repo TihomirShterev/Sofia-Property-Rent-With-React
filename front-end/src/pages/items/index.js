@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Item from '../../components/item';
 import Layout from '../../components/layout';
-// import UserContext from '../../Context';
 import styles from './index.module.css';
 
 class ItemsPage extends Component {
@@ -12,8 +11,6 @@ class ItemsPage extends Component {
       items: []
     };
   }
-
-  // static contextType = UserContext;
 
   getItems = async () => {
     const promise = await fetch('http://localhost:3001/api/items');

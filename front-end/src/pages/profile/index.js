@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import UserContext from '../../Context';
 import Layout from '../../components/layout';
 import styles from './index.module.css';
 
@@ -11,6 +13,8 @@ class ProfilePage extends Component {
       myItems: null
     };
   }
+
+  static contextType = UserContext;
 
   componentDidMount() {
     // console.log(this.props.match.params.userId);
@@ -62,6 +66,8 @@ class ProfilePage extends Component {
             <span>{myItems}</span>
           </div>
         </div>
+        {/* auth "guard" */}
+        { this.context.loggedIn ? null : <Redirect to="/" />}
       </Layout>
     );
   }
