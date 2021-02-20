@@ -46,10 +46,10 @@ function register(req, res, next) {
     });
 }
 
+// we send the cookie to verifyToken and verifyToken tells us, if it's all good
 function verifyLogin(req, res, next) {
-  // console.log(req.cookies);
-  // const token = req.cookies[config.authCookieName] || '';
-  const token = req.body.token || '';
+  // console.log(req.headers); // prints test when any loggedIn user page is reloaded
+  const token = req.headers.authorization || '';
 
   Promise.all([
     utils.jwt.verifyToken(token),
@@ -70,7 +70,7 @@ function verifyLogin(req, res, next) {
         });
     })
     .catch(err => {
-      if (!redirectAuthenticated) { next(); return; }
+      // if (!redirectAuthenticated) { next(); return; }
 
       if (['token expired', 'blacklisted token', 'jwt must be provided'].includes(err.message)) {
         res.status(401).send('UNAUTHORIZED!');
