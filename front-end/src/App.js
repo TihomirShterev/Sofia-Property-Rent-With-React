@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import UserContext from './Context';
-
-function getCookie(name) {
-  const cookieValue = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-  return cookieValue ? cookieValue[2] : null;
-}
+import getCookie from './utils/cookie';
 
 class App extends Component {
   constructor(props) {
@@ -24,7 +20,7 @@ class App extends Component {
   }
 
   logOut = () => {
-    // delete cookie
+    // clear cookie
     document.cookie = 'auth-cookie= ; expires = Thu, 01 Jan 1970 00:00:00 HMT';
 
     this.setState({
@@ -44,12 +40,10 @@ class App extends Component {
 
     // to keep the cookie after page reload
     fetch('http://localhost:3001/api/users/verify', {
-      method: 'POST',
-      body: JSON.stringify({
-        token
-      }),
+      method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': token
       }
     })
       .then(promise => {
