@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const tokenBlacklistSchema = new mongoose.Schema({
-    token: String,
+  token: String,
 }, { timestamps: { createdAt: 'created_at' } });
 
 

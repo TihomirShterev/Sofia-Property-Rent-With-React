@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const saltRounds = Number(process.env.SALTROUNDS) || 5;
+// const saltRounds = Number(process.env.SALTROUNDS) || 5;
+const saltRounds = 10;
 
-const { ObjectId } = mongoose.Schema.Types;
+const { String, Number, ObjectId } = mongoose.Schema.Types;
 
 const userSchema = new mongoose.Schema(
   {

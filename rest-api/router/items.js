@@ -6,7 +6,7 @@ const { itemController } = require("../controllers");
 router.get("/", itemController.getItems);
 // router.get("/", auth(), itemController.getItems);
 
-router.post("/", auth(), itemController.createItem);
+router.post("/create", auth(), itemController.createItem);
 
 router.get("/:itemId", itemController.getDetails);
 // router.get("/:itemId", auth(), itemController.getDetails);

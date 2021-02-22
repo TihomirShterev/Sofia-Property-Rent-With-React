@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { ObjectId } = mongoose.Schema.Types;
+const { String, ObjectId } = mongoose.Schema.Types;
 
 const itemSchema = new mongoose.Schema(
   {
@@ -25,7 +25,6 @@ const itemSchema = new mongoose.Schema(
       type: ObjectId,
       ref: "User"
     }
-  }
-);
+  }, { timestamps: true });
 
 module.exports = mongoose.model("Item", itemSchema);
