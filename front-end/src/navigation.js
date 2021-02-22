@@ -38,6 +38,7 @@ const LazyLoginPage = React.lazy(() => import('./pages/login'));
 const LazyProfilePage = React.lazy(() => import('./pages/profile'));
 const LazyItemsPage = React.lazy(() => import('./pages/items'));
 const LazyCreatePage = React.lazy(() => import('./pages/create'));
+const LazyDetailsPage = React.lazy(() => import('./pages/details'));
 const LazyNotFoundPage = React.lazy(() => import('./pages/not-found'));
 
 class LazyNavigation extends Component {
@@ -60,6 +61,7 @@ class LazyNavigation extends Component {
             <Route path="/user/profile/:userId" component={LazyProfilePage} />
             <Route path="/item" exact component={LazyItemsPage} />
             <Route path="/item/create" component={LazyCreatePage} />
+            <Route path="/item/details/:itemId" component={LazyDetailsPage} />
             <Route component={LazyNotFoundPage} />
           </Switch>
         </Suspense>

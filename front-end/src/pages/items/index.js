@@ -37,11 +37,15 @@ class ItemsPage extends Component {
 
   render() {
     // console.log(this.state.items);
+    const { items } = this.state;
 
     return (
       <Layout>
         <div className={styles["item-list"]}>
-          {this.renderItems()}
+          {items.length > 0
+            ? this.renderItems()
+            : <p>No Offers!</p>
+          }
         </div>
       </Layout>
     );

@@ -1,61 +1,130 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Redirect, useHistory } from 'react-router-dom';
 import UserContext from '../../Context';
 import Layout from '../../components/layout';
 import styles from './index.module.css';
+import getCookie from '../../utils/cookie';
 
-class CreatePage extends Component {
+const CreatePage = () => {
+  const [title, setTitle] = useState('');
+  const [imageURL, setImageURL] = useState('');
+  const [description, setDescription] = useState('');
+  const [titleError, setTitleError] = useState(false);
+  const [imageURLError, setImageURLError] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
+  const context = useContext(UserContext);
+  const history = useHistory();
 
-  static contextType = UserContext;
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  render() {
-    return (
-      <Layout>
+    // TODO: validations
+    if (title.length < 5) {
+      setTitleError(true);
+    } else {
+      setTitleError(false);
+    }
 
-        <div className={styles["new-item-border"]}>
+    if (!imageURL) {
+      setImageURLError(true);
+    } else {
+      setImageURLError(false);
+    }
 
-          <div className={styles["header-background"]}>
-            <span>CREATE OFFER</span>
-          </div>
+    if (description.length < 10) {
+      setDescriptionError(true);
+    } else {
+      setDescriptionError(false);
+    }
 
-          <form>
-            <div className={styles["new-item-title"]}>
-              <label htmlFor="title">Title: <span className={styles.red}></span></label>
-              <input type="text" name="title" id="title" />
-              {/* <p className={styles.error}>
-              Title is required.
-          </p>
-            <p className={styles.error}>
-              Title must be at least 5 characters long.
-          </p> */}
-            </div>
-            <div className={styles["new-item-image"]}>
-              <label htmlFor="imageURL">Image URL: <span className={styles.red}></span></label>
-              <input type="text" name="imageURL" id="imageURL" placeholder="http://..." />
-            </div>
-            <div className={styles["new-item-content"]}>
-              <label htmlFor="description">Description: <span className={styles.red}></span></label>
-              <textarea type="text" name="description" id="description"
-                rows="8" className="height"></textarea>
-              {/* <p className={styles.error}>
-              The field with your description is required.
-          </p>
-            <p className={styles.error}>
-              Description must be at least 10 characters long.
-          </p> */}
-            </div>
-            <div className={styles["new-item-buttons"]}>
-              <button type="button" className={styles.cancel} href="/">Back</button>
-              <button className={styles.public}>Create</button>
-            </div>
-          </form>
+    // const promise = await fetch('http://localhost:3001/api/items/create', {
+    await fetch('http://localhost:3001/api/items/create', {
+      method: 'POST',
+      body: JSON.stringify({
+        title,
+        imageURL,
+        description
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getCookie('auth-cookie')
+      }
+    });
 
+    // const data = await promise.json();
+    // console.log(data);
+
+    if (title.length >= 5 && imageURL && description.length >= 10) {
+      history.push('/item');
+    }
+  };
+
+  const titleErrorMessage = titleError ? 'Please enter a valid title consisting at least 5 characters' : null;
+  const imageURLErrorMessage = imageURLError ? 'Please enter a valid image URL' : null;
+  const descriptionErrorMessage = descriptionError ? 'Please enter a valid description consisting at least 10 characters' : null;
+
+  return (
+    <Layout>
+
+      <div className={styles["new-item-border"]}>
+
+        <div className={styles["header-background"]}>
+          <span>CREATE OFFER</span>
         </div>
-        {/* auth "guard" */}
-        { this.context.loggedIn ? null : <Redirect to="/user/login" />}
-      </Layout>
-    );
-  }
-}
+
+        <form onSubmit={handleSubmit}>
+          <div className={styles["new-item-title"]}>
+            <label htmlFor="title">Title: <span className={styles.red}></span></label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              name="title"
+              id="title" />
+            <p className={styles.error}>
+              {titleErrorMessage}
+            </p>
+          </div>
+          <div className={styles["new-item-image"]}>
+            <label htmlFor="imageURL">Image URL: <span className={styles.red}></span></label>
+            <input
+              type="text"
+              value={imageURL}
+              onChange={(e) => setImageURL(e.target.value)}
+              name="imageURL"
+              id="imageURL"
+              placeholder="http://..."
+            />
+            <p className={styles.error}>
+              {imageURLErrorMessage}
+            </p>
+          </div>
+          <div className={styles["new-item-content"]}>
+            <label htmlFor="description">Description: <span className={styles.red}></span></label>
+            <textarea
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              name="description"
+              id="description"
+              rows="8"
+              className="height"
+            ></textarea>
+            <p className={styles.error}>
+              {descriptionErrorMessage}
+            </p>
+          </div>
+          <div className={styles["new-item-buttons"]}>
+            {/* <button type="button" className={styles.cancel} href="/">Back</button> */}
+            <button className={styles.public} type="submit">Create</button>
+          </div>
+        </form>
+
+      </div>
+      {/* auth "guard" */}
+      { context.loggedIn ? null : <Redirect to="/user/login" />}
+    </Layout>
+  );
+};
 
 export default CreatePage;

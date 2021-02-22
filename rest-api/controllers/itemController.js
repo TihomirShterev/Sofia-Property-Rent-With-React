@@ -10,12 +10,16 @@ function getItems(req, res, next) {
 }
 
 function getDetails(req, res, next) {
-  const { itemId } = req.params;
+  // console.log(req.query._id);
+  const itemId = req.query._id;
 
   itemModel
     .findById(itemId)
     .populate("userId")
-    .then(item => res.json(item))
+    .then(item => {
+      // console.log(item);
+      res.json(item);
+    })
     .catch(next);
 }
 

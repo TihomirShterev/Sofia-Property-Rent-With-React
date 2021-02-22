@@ -8,8 +8,8 @@ router.get("/", itemController.getItems);
 
 router.post("/create", auth(), itemController.createItem);
 
-router.get("/:itemId", itemController.getDetails);
-// router.get("/:itemId", auth(), itemController.getDetails);
+router.get("/details", itemController.getDetails);
+// router.get("/details", auth(), itemController.getDetails);
 
 router.put("/:itemId", auth(), itemController.increment);
 

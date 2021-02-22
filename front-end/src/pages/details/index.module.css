@@ -1,0 +1,103 @@
+/* item content  */
+
+.item-content {
+  display: block;
+  flex-direction: column;
+  width: 80%;
+}
+
+.item-content span {
+  font-weight: bold;
+}
+
+/* item title  */
+
+.item-name-wrapper {
+  height: 500px;
+  width: 400px;
+  display: block;
+  justify-content: space-between;
+  padding: 0.3em 0.5em;
+  border-radius: 0.3em;
+  font-size: 0.8em;
+  margin-top: 1em;
+}
+
+.item-title {
+  padding: 0;
+}
+
+.item-name {
+  width: 100%;
+}
+
+.columns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.7rem;
+}
+
+.first-col {
+  margin: 17px 0px 0px -170px;
+}
+
+.second-col {
+  margin: 134px 0px 0px 0px;
+}
+
+img {
+  height: 350px;
+  width: 415px;
+  margin: 20px 49px;
+  border: solid;
+  border-radius: 3%;
+}
+
+.peopleWhoIncremented {
+  text-align: center;
+}
+
+.description {
+  text-align: center;
+  font-size: larger;
+}
+
+.nick-name {
+  text-align: center;
+  font-size: larger;
+  margin: 60px;
+}
+
+.peopleWhoIncremented button {
+  padding: 0.2rem 0.5rem;
+  border: none;
+  border-radius: 0.3rem;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+}
+
+.subscribe {
+  background-color: green;
+}
+
+.unsubscribe {
+  background-color: red;
+}
+
+.item-title {
+  width: 100%;
+}
+
+.item-name-wrapper .peopleWhoIncremented p {
+  text-align: center;
+}
+
+.item-name {
+  margin-right: 1em;
+}
+
+.item-name h2 {
+  padding-top: 0;
+  font-size: 30px;
+}
