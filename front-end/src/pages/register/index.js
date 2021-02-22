@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Layout from '../../components/layout';
 import styles from './index.module.css';
 import {
-  Link
+  Link, Redirect
 } from 'react-router-dom';
 import UserContext from '../../Context';
 
@@ -83,7 +83,7 @@ class RegisterPage extends Component {
       });
     }
 
-    // query
+    // request
     try {
       const promise = await fetch('http://localhost:3001/api/users/register', {
         method: 'POST',
@@ -135,7 +135,6 @@ class RegisterPage extends Component {
     const passwordErrorMessage = passwordError ? 'Please enter a valid password consisting at least 6 characters' : null;
     const rePasswordErrorMessage = rePasswordError ? 'Please enter a matching password' : null;
     const emptyFieldsErrorMessage = emptyFieldsError ? 'Please fill all fields above' : null;
-
 
     return (
       <Layout>
@@ -200,6 +199,7 @@ class RegisterPage extends Component {
 
           </fieldset>
         </form>
+        { this.context.loggedIn ? <Redirect to="/" /> : null}
       </Layout>
     );
   };

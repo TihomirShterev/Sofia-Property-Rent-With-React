@@ -67,7 +67,7 @@ class ProfilePage extends Component {
           </div>
         </div>
         {/* auth "guard" */}
-        { this.context.loggedIn ? null : <Redirect to="/" />}
+        { this.context.loggedIn ? null : <Redirect to="/user/login" />}
       </Layout>
     );
   }

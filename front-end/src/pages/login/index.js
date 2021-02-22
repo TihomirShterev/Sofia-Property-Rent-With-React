@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Layout from '../../components/layout';
 import styles from './index.module.css';
 import {
-  Link
+  Link, Redirect
 } from 'react-router-dom';
 import UserContext from '../../Context';
 
@@ -144,6 +144,7 @@ class LoginPage extends Component {
 
           </fieldset>
         </form>
+        { this.context.loggedIn ? <Redirect to="/" /> : null}
       </Layout>
     );
   };
