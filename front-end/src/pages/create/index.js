@@ -37,46 +37,47 @@ const CreatePage = () => {
       setDescriptionError(false);
     }
 
-    // const promise = await fetch('http://localhost:3001/api/items/create', {
-    await fetch('http://localhost:3001/api/items/create', {
-      method: 'POST',
-      body: JSON.stringify({
-        title,
-        imageURL,
-        description
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': getCookie('auth-cookie')
-      }
-    });
-
-    // const data = await promise.json();
-    // console.log(data);
-
     if (title.length >= 5 && imageURL && description.length >= 10) {
+      // const promise = await fetch('http://localhost:3001/api/items/create', {
+      await fetch('http://localhost:3001/api/items/create', {
+        method: 'POST',
+        body: JSON.stringify({
+          title,
+          imageURL,
+          description
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': getCookie('auth-cookie')
+        }
+      });
+
+      // const data = await promise.json();
+      // console.log(data);
+
       history.push('/item');
     }
   };
 
-  const openWidget = () => {
-    const widget = window.cloudinary.createUploadWidget({
-      cloudName: "tyscloud",
-      uploadPreset: "sofiapropertyrent"
-    }, (error, result) => {
-      console.log('Error: ', error);
-      console.log('Result: ', result);
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'sofiapropertyrent');
 
-      if (result.event === 'success') {
-        setImageURL(result.info.url);
-      }
-    });
+    const res = await fetch("https://api.cloudinary.com/v1_1/tyscloud/image/upload",
+      {
+        method: 'POST',
+        body: data
+      });
 
-    widget.open();
+    const file = await res.json();
+    // console.log(file);
+    setImageURL(file.secure_url);
   };
 
   const titleErrorMessage = titleError ? 'Please enter a valid title consisting at least 5 characters' : null;
-  const imageURLErrorMessage = imageURLError ? 'Please enter a valid image URL' : null;
+  const imageURLErrorMessage = imageURLError ? 'Please upload a valid image' : null;
   const descriptionErrorMessage = descriptionError ? 'Please enter a valid description consisting at least 10 characters' : null;
 
   return (
@@ -102,20 +103,15 @@ const CreatePage = () => {
             </p>
           </div>
           <div className={styles["new-item-image"]}>
-            {imageURL ? (<img src={imageURL} />) : null}
-            <button onClick={openWidget}>Upload Image</button>
-            {/* <label htmlFor="imageURL">Image URL: <span className={styles.red}></span></label>
+            {imageURL ? (<img src={imageURL} style={{ width: '300px' }} alt="" />) : null}
             <input
-              type="text"
-              value={imageURL}
-              onChange={(e) => setImageURL(e.target.value)}
+              type="file"
               name="imageURL"
-              id="imageURL"
-              placeholder="http://..."
+              onChange={uploadImage}
             />
             <p className={styles.error}>
               {imageURLErrorMessage}
-            </p> */}
+            </p>
           </div>
           <div className={styles["new-item-content"]}>
             <label htmlFor="description">Description: <span className={styles.red}></span></label>
