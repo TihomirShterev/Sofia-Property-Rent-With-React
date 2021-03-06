@@ -59,6 +59,22 @@ const CreatePage = () => {
     }
   };
 
+  const openWidget = () => {
+    const widget = window.cloudinary.createUploadWidget({
+      cloudName: "tyscloud",
+      uploadPreset: "sofiapropertyrent"
+    }, (error, result) => {
+      console.log('Error: ', error);
+      console.log('Result: ', result);
+
+      if (result.event === 'success') {
+        setImageURL(result.info.url);
+      }
+    });
+
+    widget.open();
+  };
+
   const titleErrorMessage = titleError ? 'Please enter a valid title consisting at least 5 characters' : null;
   const imageURLErrorMessage = imageURLError ? 'Please enter a valid image URL' : null;
   const descriptionErrorMessage = descriptionError ? 'Please enter a valid description consisting at least 10 characters' : null;
@@ -86,7 +102,9 @@ const CreatePage = () => {
             </p>
           </div>
           <div className={styles["new-item-image"]}>
-            <label htmlFor="imageURL">Image URL: <span className={styles.red}></span></label>
+            {imageURL ? (<img src={imageURL} />) : null}
+            <button onClick={openWidget}>Upload Image</button>
+            {/* <label htmlFor="imageURL">Image URL: <span className={styles.red}></span></label>
             <input
               type="text"
               value={imageURL}
@@ -97,7 +115,7 @@ const CreatePage = () => {
             />
             <p className={styles.error}>
               {imageURLErrorMessage}
-            </p>
+            </p> */}
           </div>
           <div className={styles["new-item-content"]}>
             <label htmlFor="description">Description: <span className={styles.red}></span></label>
