@@ -1,6 +1,6 @@
 # Sofia-Property-Rent-With-React
 
-My project is a renting platform. It's goal is to be user-friendlier, more reliable, more affordable and to provide better and more services that already existing platforms of the same kind. 
+My project is a renting platform. It's goal is to be user-friendlier, more reliable, more affordable and to provide better and more services than already existing platforms of the same kind. 
 
 Run 'npm install' and then 'npm start' in the 'rest-api' folder to get the server ready. MongoDB is used. Listening on port: 3001.
 
