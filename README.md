@@ -4,7 +4,7 @@ My project is a renting platform. Its goal is to be user-friendlier, more reliab
 
 Run 'npm install' and then 'npm start' in the 'rest-api' folder to get the server ready. MongoDB Atlas Cloud Database is used. Listening on port: 3001.
 
-Run 'npm install' and then 'npm start' in the 'front-end' folder to build the app. Cloudinary is used for file storage cloud API. Listening on port: 3000.
+Run 'npm install' and then 'npm start' in the 'front-end' folder to build the app. Cloudinary is used as a file storage cloud API. Listening on port: 3000.
 
 ### Currently hosted on Heroku at [https://estatesbg.herokuapp.com/]
 
