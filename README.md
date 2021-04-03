@@ -2,14 +2,16 @@
 
 My project is a renting platform. It's goal is to be user-friendlier, more reliable, more affordable and to provide better and more services than already existing platforms of the same kind. 
 
-Run 'npm install' and then 'npm start' in the 'rest-api' folder to get the server ready. MongoDB is used. Listening on port: 3001.
+Run 'npm install' and then 'npm start' in the 'rest-api' folder to get the server ready. MongoDB Atlas Cloud Database is used. Listening on port: 3001.
 
 Run 'npm install' and then 'npm start' in the 'front-end' folder to build the app. Listening on port: 3000.
+
+#### Currently hosted on [Heroku](https://estatesbg.herokuapp.com/)
 
 
 # Base API URL
 
-```https://localhost:3001/api```
+```http://localhost:3001/```
 
 
 # Front-End Endpoints:
