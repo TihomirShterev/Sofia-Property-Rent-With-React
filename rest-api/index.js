@@ -4,6 +4,8 @@ const dbConnector = require('./config/db');
 const apiRouter = require('./router');
 const cors = require('cors');
 const { errorHandler } = require('./utils');
+const path = require('path');
+const express = require('express');
 
 dbConnector()
   .then(() => {
@@ -12,13 +14,12 @@ dbConnector()
     const app = require('express')();
     require('./config/express')(app);
 
-    app.use(cors({
-      // origin: config.origin,
-      // credentials: true,
-      exposedHeaders: 'Authorization'
-    }));
+    app.use(cors(config.cors));
 
     app.use('/api', apiRouter);
+
+    app.use(express.static(path.join(__dirname, "./build")));
+    app.get("*", (req, res) => res.sendFile(path.join(__dirname, "./build/index.html")));
 
     app.use(errorHandler);
 
