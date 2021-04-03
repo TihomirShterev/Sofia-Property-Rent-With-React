@@ -18,7 +18,7 @@ const DetailsPage = () => {
   const getDetails = useCallback(async () => {
     const id = params.itemId;
     // console.log(id);
-    const res = await fetch(`http://localhost:3001/api/items/details?_id=${id}`);
+    const res = await fetch(`https://estatesbg.herokuapp.com/api/items/details?_id=${id}`);
     // console.log(res);
     const item = await res.json();
     // console.log(item);

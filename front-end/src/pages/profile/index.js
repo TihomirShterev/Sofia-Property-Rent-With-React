@@ -22,7 +22,7 @@ class ProfilePage extends Component {
   }
 
   getProfile = async (id) => {
-    const res = await fetch(`http://localhost:3001/api/users/profile?_id=${id}`);
+    const res = await fetch(`https://estatesbg.herokuapp.com/api/users/profile?_id=${id}`);
     // console.log(res);
 
     if (!res.ok) {
@@ -44,7 +44,7 @@ class ProfilePage extends Component {
       myItems
     } = this.state;
 
-    if (!email) {
+    if (this.context.loggedIn === null) {
       return (
         <Layout>
           <div>Loading....</div>

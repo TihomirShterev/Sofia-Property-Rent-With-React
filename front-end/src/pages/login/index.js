@@ -49,7 +49,7 @@ class LoginPage extends Component {
     }
 
     try {
-      const promise = await fetch('http://localhost:3001/api/users/login', {
+      const promise = await fetch('https://estatesbg.herokuapp.com/api/users/login', {
         method: 'POST',
         body: JSON.stringify({
           email,

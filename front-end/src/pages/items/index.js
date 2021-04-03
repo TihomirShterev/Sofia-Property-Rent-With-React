@@ -13,7 +13,7 @@ class ItemsPage extends Component {
   }
 
   getItems = async () => {
-    const promise = await fetch('http://localhost:3001/api/items');
+    const promise = await fetch('https://estatesbg.herokuapp.com/api/items');
     const items = await promise.json();
 
     this.setState({

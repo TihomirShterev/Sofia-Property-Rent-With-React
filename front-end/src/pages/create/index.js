@@ -38,8 +38,8 @@ const CreatePage = () => {
     }
 
     if (title.length >= 5 && imageURL && description.length >= 10) {
-      // const promise = await fetch('http://localhost:3001/api/items/create', {
-      await fetch('http://localhost:3001/api/items/create', {
+      // const promise = await fetch('https://estatesbg.herokuapp.com/api/items/create', {
+      await fetch('https://estatesbg.herokuapp.com/api/items/create', {
         method: 'POST',
         body: JSON.stringify({
           title,

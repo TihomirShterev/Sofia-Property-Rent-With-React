@@ -85,7 +85,7 @@ class RegisterPage extends Component {
 
     // request
     try {
-      const promise = await fetch('http://localhost:3001/api/users/register', {
+      const promise = await fetch('https://estatesbg.herokuapp.com/api/users/register', {
         method: 'POST',
         body: JSON.stringify({
           email,
