@@ -6,7 +6,7 @@ Run 'npm install' and then 'npm start' in the 'rest-api' folder to get the serve
 
 Run 'npm install' and then 'npm start' in the 'front-end' folder to build the app. Cloudinary is used as a file storage cloud API. Listening on port: 3000.
 
-### Currently hosted on Heroku at [https://estatesbg.herokuapp.com/]
+#### Currently hosted on Heroku at https://estatesbg.herokuapp.com/
 
 
 ## Base API URL
