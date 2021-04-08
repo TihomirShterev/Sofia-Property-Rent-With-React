@@ -34,46 +34,38 @@ const DetailsPage = () => {
 
   return (
     <Layout>
-      <div className={styles["item-content"]}>
-        {/* item-title */}
-        <div className={styles["item-title"]}>
-          <div className={styles["item-name-wrapper"]}>
-            <div className={styles.columns}>
+      <div className={styles.columns}>
 
-              <div className={styles["first-col"]}>
-                <div className={styles["item-name"]}>
-                  <h2>{title}</h2>
-                </div>
-                <div className={styles["item-image"]}>
-                  <img src={imageURL} alt="" />
-                </div>
-              </div>
+        <div className={styles["first-col"]}>
+          <div className={styles["item-name"]}>
+            <h2>{title}</h2>
+          </div>
+          <div className={styles["item-image-container"]}>
+            <img src={imageURL} alt="" />
+          </div>
+        </div>
 
-              <div className={styles["second-col"]}>
-                <div className={styles.description}>
-                  <p>Description:</p>
-                  <span>{description}</span>
-                </div>
-                {/* <div className={styles.peopleWhoIncremented}>
+        <div className={styles["second-col"]}>
+          <div className={styles.description}>
+            <p>Description:</p>
+            <span>{description}</span>
+          </div>
+          {/* <div className={styles.peopleWhoIncremented}>
               <p>Likes:</p> 
               <span>{peopleWhoIncremented.length}</span>
             </div> */}
-                <div className={styles["nick-name"]}>
-                  <p>Contact author:</p>
-                  <span>{authorEmail}</span>
-                </div>
-              </div>
-
-            </div>
-
-            {/* <button className={styles.edit}>Edit</button>
-          <button className={styles.delete}>Delete</button>
-          <button className={styles.increment}>Like</button> */}
-
+          <div className={styles["nick-name"]}>
+            <p>Contact author:</p>
+            <span>{authorEmail}</span>
           </div>
         </div>
 
       </div>
+
+      {/* <button className={styles.edit}>Edit</button>
+          <button className={styles.delete}>Delete</button>
+          <button className={styles.increment}>Like</button> */}
+
       {/* auth "guard" */}
       { context.loggedIn ? null : <Redirect to="/user/login" />}
     </Layout>

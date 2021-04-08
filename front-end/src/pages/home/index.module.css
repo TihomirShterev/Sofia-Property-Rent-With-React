@@ -3,10 +3,10 @@
   padding: 0.3em 0.5em;
   /* border: 1px solid #999;
   border-radius: 0.3em; */
-  font-size: 2em;
 }
 
 .welcome h3 {
+  font-size: 1.4em;
   background-color:  rgb(211, 174, 10);
   border-radius: 0.3em;
   /* width: 100%; */
@@ -56,7 +56,7 @@
   width: 33%;
 }
 
-img {
+.item-image img {
   width: 100%;
   border: solid #999;
   display: block;

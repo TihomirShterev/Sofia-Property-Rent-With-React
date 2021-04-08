@@ -1,22 +1,29 @@
 /* new-item */
-
-.new-item-border {
+.create-item-form {
   border: 3px solid rgb(211, 174, 10);
   border-radius: 1em;
-  width: 80%;
-  margin: auto;
-  margin-top: 9px;
+  width: 50%;
+  margin: 0 auto 5%;
   padding: 1em;
+  display: flex;
+  justify-content: space-around;
 }
 
 .new-item-border .input {
   margin-bottom: 1em;
 }
 
+.new-item-image,
+.create-item-info {
+  flex-basis: 45%;
+  align-self: center;
+}
+
+.uploaded-image {
+  width: 100%;
+}
+
 .header-background {
-  /* background-color: rgb(211, 174, 10);
-  border: 1px solid rgb(211, 174, 10); */
-  padding: 1.5em;
   padding-bottom: 0;
   margin-bottom: 1em;
   border-top-right-radius: 1em;
@@ -24,23 +31,10 @@
   text-decoration: underline;
 }
 
-.header-background span {
-  /* background-color: #fff;
-  padding: 0.5em; */
+.header-background p {
+  text-align: center;
   margin: 29px;
   border-radius: 0.3em;
-}
-
-.title, .new-item-content {
-  display: flex;
-  flex-direction: column;
-}
-
-.new-item-content {
-  min-height: 100%;
-  width: 100%;
-  padding: 0;
-  margin: 0;
 }
 
 .new-item-content textarea {
@@ -53,18 +47,9 @@
   margin-bottom: 0.3em;
 }
 
-.new-item-title {
-  margin-top: 30px;
-  display: grid;
-}
-
 .new-item-title input {
-  width: 100%;
+  width: 102%;
   background: white;
-}
-
-.new-item-image {
-  margin-top: 30px;
 }
 
 .new-item-image input {
@@ -72,13 +57,9 @@
   width: 100%;
 }
 
-.new-item-content {
-  margin-top: 30px;
-}
-
 .new-item-content textarea {
   background: white;
-  height: 80px;
+  height: 100px;
 }
 
 button+button {
@@ -90,10 +71,17 @@ button+button {
   text-align: center;
 }
 
-.new-item-buttons button {
+.create-new-item-btn {
   padding: 0.4em 1.5em;
   border: 1px solid #333333;
   border-radius: 0.3em;
+  background: #bd9922;;
+  color: white;
+}
+
+.create-new-item-btn:hover {
+  cursor: pointer;
+  background: black;
 }
 
 p.error {

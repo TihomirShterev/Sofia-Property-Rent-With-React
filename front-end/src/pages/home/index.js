@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './index.module.css';
-import image from '../../images/sofiaimoti-2000-1024x692.jpg';
 import Layout from '../../components/layout';
 
 const HomePage = () => {
@@ -11,7 +10,7 @@ const HomePage = () => {
         <p>Hello and welcome to the best property renting platform of Sofia, the capital of Bulgaria!</p>
       </div>
       <div className={styles["item-image"]}>
-        <img src={image} alt=""></img>
+        <img src="https://res.cloudinary.com/tyscloud/image/upload/v1617901160/sofiaimoti-2000-1024x692_ufdxfp.jpg" alt=""></img>
       </div>
     </Layout>
   );

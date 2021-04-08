@@ -1,13 +1,6 @@
 .item-list {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 15%;
-}
-
-app-item {
-  padding: 15px 23px;
-}
-
-app-item.item-image {
-  align-content: center;
+  margin-bottom: 10%;
+  justify-content: space-evenly;
 }

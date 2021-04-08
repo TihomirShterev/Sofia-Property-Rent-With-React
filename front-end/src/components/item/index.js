@@ -17,10 +17,10 @@ const Item = ({ _id, title, imageURL }) => {
       <div className={styles["item-name"]}>
         <Link to={`/item/details/${_id}`} className={styles.normal}>
           <h2>{title}</h2>
+          <div className={styles["item-image-container"]}>
+            <img src={imageURL} alt="" />
+          </div>
         </Link>
-        <div className={styles["item-image"]}>
-          <img src={imageURL} alt="" />
-        </div>
       </div>
     </div>
   );

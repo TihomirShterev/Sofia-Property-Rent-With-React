@@ -86,24 +86,12 @@ const CreatePage = () => {
       <div className={styles["new-item-border"]}>
 
         <div className={styles["header-background"]}>
-          <span>CREATE OFFER</span>
+          <p>CREATE OFFER</p>
         </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className={styles["new-item-title"]}>
-            <label htmlFor="title">Title: <span className={styles.red}></span></label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              name="title"
-              id="title" />
-            <p className={styles.error}>
-              {titleErrorMessage}
-            </p>
-          </div>
+        <form className={styles["create-item-form"]} onSubmit={handleSubmit}>
           <div className={styles["new-item-image"]}>
-            {imageURL ? (<img src={imageURL} style={{ width: '300px' }} alt="" />) : null}
+            {imageURL ? (<img className={styles["uploaded-image"]} src={imageURL} alt="" />) : null}
             <input
               type="file"
               name="imageURL"
@@ -113,24 +101,38 @@ const CreatePage = () => {
               {imageURLErrorMessage}
             </p>
           </div>
-          <div className={styles["new-item-content"]}>
-            <label htmlFor="description">Description: <span className={styles.red}></span></label>
-            <textarea
-              type="text"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              name="description"
-              id="description"
-              rows="8"
-              className="height"
-            ></textarea>
-            <p className={styles.error}>
-              {descriptionErrorMessage}
-            </p>
-          </div>
-          <div className={styles["new-item-buttons"]}>
-            {/* <button type="button" className={styles.cancel} href="/">Back</button> */}
-            <button className={styles.public} type="submit">Create</button>
+          <div className={styles["create-item-info"]}>
+            <div className={styles["new-item-title"]}>
+              <label htmlFor="title">Title: <span className={styles.red}></span></label>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                name="title"
+                id="title" />
+              <p className={styles.error}>
+                {titleErrorMessage}
+              </p>
+            </div>
+            <div className={styles["new-item-content"]}>
+              <label htmlFor="description">Description: <span className={styles.red}></span></label>
+              <textarea
+                type="text"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                name="description"
+                id="description"
+                rows="30"
+                className="height"
+              ></textarea>
+              <p className={styles.error}>
+                {descriptionErrorMessage}
+              </p>
+            </div>
+            <div className={styles["new-item-buttons"]}>
+              {/* <button type="button" className={styles.cancel} href="/">Back</button> */}
+              <button className={styles["create-new-item-btn"]} type="submit">Create</button>
+            </div>
           </div>
         </form>
 

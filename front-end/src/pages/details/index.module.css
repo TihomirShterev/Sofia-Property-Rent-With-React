@@ -1,54 +1,26 @@
 /* item content  */
-
-.item-content {
-  display: block;
-  flex-direction: column;
-  width: 80%;
+.columns {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
-.item-content span {
-  font-weight: bold;
+.first-col,
+.second-col {
+  flex-basis: 30%;
+  margin: 2% 5%;
 }
 
-/* item title  */
-
-.item-name-wrapper {
-  height: 500px;
-  width: 400px;
-  display: block;
-  justify-content: space-between;
-  padding: 0.3em 0.5em;
-  border-radius: 0.3em;
-  font-size: 0.8em;
-  margin-top: 1em;
+.first-col h2 {
+  font-family: fangsong;
 }
 
-.item-title {
-  padding: 0;
-}
-
-.item-name {
+.item-image-container {
   width: 100%;
 }
 
-.columns {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 0.7rem;
-}
-
-.first-col {
-  margin: 17px 0px 0px -170px;
-}
-
-.second-col {
-  margin: 134px 0px 0px 0px;
-}
-
-img {
-  height: 350px;
-  width: 415px;
-  margin: 20px 49px;
+.item-image-container img {
+  width: 100%;
   border: solid;
   border-radius: 3%;
 }
@@ -100,4 +72,27 @@ img {
 .item-name h2 {
   padding-top: 0;
   font-size: 30px;
+}
+
+
+.peopleWhoIncremented {
+  text-align: right;
+  flex-basis: 25%;
+}
+
+.peopleWhoIncremented button {
+  padding: 0.2rem 0.5rem;
+  border: none;
+  border-radius: 0.3rem;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+}
+
+.increment {
+  background-color: green;
+}
+
+.decrement {
+  background-color: red;
 }
