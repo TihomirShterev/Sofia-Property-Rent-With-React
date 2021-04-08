@@ -1,11 +1,9 @@
 /* welcome component */
-
 .welcome {
   padding: 0.3em 0.5em;
   /* border: 1px solid #999;
   border-radius: 0.3em; */
-  font-size: 0.8em;
-  margin-top: 1em;
+  font-size: 2em;
 }
 
 .welcome h3 {
@@ -13,11 +11,13 @@
   border-radius: 0.3em;
   /* width: 100%; */
   padding: 0.3em 1em;
+  margin: 0;
   text-align: center;
 }
 
 .welcome p {
   padding: 1em;
+  margin-top: 0;
   border-bottom: 1px solid #999;
   font-style: normal;
   font-size: x-large;
@@ -51,9 +51,13 @@
   list-style: none;
 }
 
+.item-image {
+  margin: 0 auto 35px;
+  width: 33%;
+}
+
 img {
-  height: 305px;
-  width: 500px;
+  width: 100%;
   border: solid #999;
   display: block;
   margin-left: auto;
