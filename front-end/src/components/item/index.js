@@ -12,6 +12,9 @@ const Item = ({ _id, title, imageURL }) => {
   // const context = useContext(UserContext);
   // console.log(context);
 
+  // // break the component on purpose to test error boundaries
+  // console.log(test);
+
   return (
     <div className={styles["item-name-wrapper"]}>
       <div className={styles["item-name"]}>

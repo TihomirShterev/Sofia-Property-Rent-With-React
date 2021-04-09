@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Item from '../../components/item';
 import Layout from '../../components/layout';
+import ErrorBoundary from '../../ErrorBoundary';
 import styles from './index.module.css';
 
 class ItemsPage extends Component {
@@ -41,12 +42,14 @@ class ItemsPage extends Component {
 
     return (
       <Layout>
-        <div className={styles["item-list"]}>
-          {items.length > 0
-            ? this.renderItems()
-            : <p>No Offers!</p>
-          }
-        </div>
+        <ErrorBoundary>
+          <div className={styles["item-list"]}>
+            {items.length > 0
+              ? this.renderItems()
+              : <p>No Offers!</p>
+            }
+          </div>
+        </ErrorBoundary>
       </Layout>
     );
   };
