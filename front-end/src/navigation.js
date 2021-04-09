@@ -60,8 +60,20 @@ class LazyNavigation extends Component {
             <Route path="/user/logout" render={() => loggedIn ? null : <Redirect to="/" />} />
             <Route path="/user/profile/:userId" component={LazyProfilePage} />
             <Route path="/item" exact component={LazyItemsPage} />
-            <Route path="/item/create" component={LazyCreatePage} />
-            <Route path="/item/details/:itemId" component={LazyDetailsPage} />
+            <Route path="/item/create">
+              {
+                loggedIn
+                  ? (<LazyCreatePage />)
+                  : (<Redirect to="/user/login" />)
+              }
+            </Route>
+            <Route path="/item/details/:itemId">
+              {
+                loggedIn
+                  ? (<LazyDetailsPage />)
+                  : (<Redirect to="/user/login" />)
+              }
+            </Route>
             <Route component={LazyNotFoundPage} />
           </Switch>
         </Suspense>

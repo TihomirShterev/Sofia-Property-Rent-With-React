@@ -1,6 +1,5 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { Redirect, useParams } from 'react-router-dom';
-import UserContext from '../../Context';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Layout from '../../components/layout';
 import styles from './index.module.css';
 
@@ -9,7 +8,6 @@ const DetailsPage = () => {
   const [imageURL, setImageURL] = useState('');
   const [description, setDescription] = useState('');
   const [authorEmail, setAuthorEmail] = useState('');
-  const context = useContext(UserContext);
   const params = useParams();
 
   // useCallBack is needed (so that there's no warning thrown in the console), because:
@@ -65,9 +63,6 @@ const DetailsPage = () => {
       {/* <button className={styles.edit}>Edit</button>
           <button className={styles.delete}>Delete</button>
           <button className={styles.increment}>Like</button> */}
-
-      {/* auth "guard" */}
-      { context.loggedIn ? null : <Redirect to="/user/login" />}
     </Layout>
   );
 };

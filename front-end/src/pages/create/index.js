@@ -1,6 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
-import UserContext from '../../Context';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Layout from '../../components/layout';
 import styles from './index.module.css';
 import getCookie from '../../utils/cookie';
@@ -12,7 +11,6 @@ const CreatePage = () => {
   const [titleError, setTitleError] = useState(false);
   const [imageURLError, setImageURLError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
-  const context = useContext(UserContext);
   const history = useHistory();
 
   const handleSubmit = async (event) => {
@@ -137,8 +135,6 @@ const CreatePage = () => {
         </form>
 
       </div>
-      {/* auth "guard" */}
-      { context.loggedIn ? null : <Redirect to="/user/login" />}
     </Layout>
   );
 };
