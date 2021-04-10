@@ -25,11 +25,13 @@ class ItemsPage extends Component {
   renderItems() {
     const { items } = this.state;
 
-    return items.map(item => {
-      return (
-        <Item key={item._id} {...item} />
-      );
-    });
+    return items
+      .sort((a, b) => a.title.localeCompare(b.title))
+      .map(item => {
+        return (
+          <Item key={item._id} {...item} />
+        );
+      });
   }
 
   componentDidMount() {

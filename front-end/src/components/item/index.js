@@ -16,15 +16,13 @@ const Item = ({ _id, title, imageURL }) => {
   // console.log(test);
 
   return (
-    <div className={styles["item-name-wrapper"]}>
-      <div className={styles["item-name"]}>
-        <Link to={`/item/details/${_id}`} className={styles.normal}>
-          <h2>{title}</h2>
-          <div className={styles["item-image-container"]}>
-            <img src={imageURL} alt="" />
-          </div>
-        </Link>
-      </div>
+    <div className={styles["item-container"]}>
+      <Link to={`/item/details/${_id}`} className={styles["item-link"]}>
+        <h2>{title}</h2>
+        <div className={styles["image-container"]}>
+          <img src={imageURL} alt="" />
+        </div>
+      </Link>
     </div>
   );
 };

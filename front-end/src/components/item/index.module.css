@@ -1,4 +1,4 @@
-.item-name-wrapper {
+.item-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,12 +8,12 @@
   border-radius: 1.3em;
 }
 
-.item-name a {
+.item-container .item-link {
   text-decoration: none;
   color: black;
 }
 
-.item-name h2 {
+.item-container .item-link h2 {
   font-size: 1.4em;
   font-family: fangsong;
   max-width: 100%; 
@@ -22,11 +22,7 @@
   white-space: nowrap;
 }
 
-.item-name {
-  width: 100%;
-}
-
-.item-image-container img {
+.image-container img {
   height: 250px;
   width: 310px;
   border: solid;

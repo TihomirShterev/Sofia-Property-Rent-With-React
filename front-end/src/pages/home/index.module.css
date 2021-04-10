@@ -51,15 +51,21 @@
   list-style: none;
 }
 
-.item-image {
-  margin: 0 auto 35px;
-  width: 33%;
+.newest-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.item-image img {
-  width: 100%;
-  border: solid #999;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.newest-items .title {
+  color:rgb(211, 174, 10);
+  font-size: 26px;
+}
+
+.newest-items-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  justify-content: space-evenly;
+  width: 75%;
 }
