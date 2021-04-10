@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Layout from '../../components/layout';
+import Layout from '../../../common/layout';
 import styles from './index.module.css';
 
 const DetailsPage = () => {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import UserContext from '../../Context';
-import Layout from '../../components/layout';
+import UserContext from '../../../../Context';
+import Layout from '../../../common/layout';
 import styles from './index.module.css';
 
 class ProfilePage extends Component {

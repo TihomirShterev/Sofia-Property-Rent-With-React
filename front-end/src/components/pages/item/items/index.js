@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Item from '../../components/item';
-import Layout from '../../components/layout';
-import ErrorBoundary from '../../ErrorBoundary';
+import Item from '../../../common/item';
+import Layout from '../../../common/layout';
+import ErrorBoundary from '../../../common/ErrorBoundary';
 import styles from './index.module.css';
 
 class ItemsPage extends Component {

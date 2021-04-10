@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Layout from '../../components/layout';
+import Layout from '../../../common/layout';
 import styles from './index.module.css';
-import getCookie from '../../utils/cookie';
+import getCookie from '../../../../utils/cookie';
 
 const CreatePage = () => {
   const [title, setTitle] = useState('');
@@ -107,7 +107,8 @@ const CreatePage = () => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 name="title"
-                id="title" />
+                id="title"
+              />
               <p className={styles.error}>
                 {titleErrorMessage}
               </p>

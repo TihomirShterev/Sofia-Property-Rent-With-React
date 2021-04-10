@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styles from './index.module.css';
-import Layout from '../../components/layout';
-import Item from '../../components/item';
+import Layout from '../../common/layout';
+import Item from '../../common/item';
 
 const HomePage = () => {
   const [items, setItems] = useState([]);
@@ -25,7 +25,7 @@ const HomePage = () => {
 
   useEffect(() => {
     getItems();
-  }, []);
+  }, [getItems]);
 
   return (
     <Layout>

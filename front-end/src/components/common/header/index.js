@@ -3,7 +3,7 @@ import styles from './index.module.css';
 import {
   Link
 } from 'react-router-dom';
-import UserContext from '../../Context';
+import UserContext from '../../../Context';
 
 class Header extends Component {
 
