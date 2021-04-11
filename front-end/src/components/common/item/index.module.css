@@ -8,6 +8,10 @@
   border-radius: 1.3em;
 }
 
+.item-container:hover {
+  border: 3px solid black;
+}
+
 .item-container .item-link {
   text-decoration: none;
   color: black;
@@ -16,7 +20,7 @@
 .item-container .item-link h2 {
   font-size: 1.4em;
   font-family: fangsong;
-  max-width: 100%; 
+  max-width: 313px; 
   text-overflow: ellipsis; 
   overflow: hidden;
   white-space: nowrap;

@@ -65,7 +65,7 @@
 .newest-items-list {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 auto;
+  margin: 0 auto 3%;
   justify-content: space-evenly;
   width: 75%;
 }
