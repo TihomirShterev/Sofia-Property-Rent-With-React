@@ -36,7 +36,7 @@ class App extends Component {
       return;
     }
 
-    fetch('http://localhost:3001/api/users/verify', {
+    fetch('https://estatesbg.herokuapp.com/api/users/verify', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
