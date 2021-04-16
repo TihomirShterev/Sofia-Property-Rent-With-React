@@ -16,25 +16,10 @@ const userService = {
       const res = await promise.json();
 
       if (authToken) {
-        if (
-          path === '/register'
-          && (data.email.match(/^[a-zA-Z0-9.-]{6,}@\w+.(com|bg)$/))
-          && (data.password.length >= 6)
-          && (data.rePassword === data.password)
-          && (data.email && data.password && data.rePassword)
-        ) {
-          onSuccess({
-            email: res.email,
-            id: res._id
-          });
-        } else if (
-          path === '/login'
-        ) {
-          onSuccess({
-            email: res.email,
-            id: res._id
-          });
-        }
+        onSuccess({
+          email: res.email,
+          id: res._id
+        });
       } else {
         onFailure();
       }

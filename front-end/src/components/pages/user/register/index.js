@@ -40,7 +40,7 @@ class RegisterPage extends Component {
       rePassword
     } = this.state;
 
-    if (0 < email.length && !email.match(/^[a-zA-Z0-9.-]{6,}@\w+.(com|bg)$/)) {
+    if (0 < email.length && /^[a-zA-Z0-9.-]{6,}@\w+.(com|bg)$/.test(email) === false) {
       this.setState({
         emailError: true
       });
@@ -80,15 +80,19 @@ class RegisterPage extends Component {
       });
     }
 
-    await userService.authenticate(
-      '/register',
-      { email, password, rePassword },
-      (user) => {
-        this.context.logIn(user);
-        this.props.history.push('/');
-      },
-      (err) => console.log('Error', err)
-    );
+    let hasNoError = /^[a-zA-Z0-9.-]{6,}@\w+.(com|bg)$/.test(email) && password.length >= 6 && rePassword && rePassword === password
+
+    if (hasNoError) {
+      await userService.authenticate(
+        '/register',
+        { email, password, rePassword },
+        (user) => {
+          this.context.logIn(user);
+          this.props.history.push('/');
+        },
+        (err) => console.log('Error', err)
+      );
+    }
   };
 
   render() {
