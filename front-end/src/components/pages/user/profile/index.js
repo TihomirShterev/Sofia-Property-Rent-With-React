@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import UserContext from '../../../../Context';
+import userService from '../../../../services/userService';
 import Layout from '../../../common/layout';
 import styles from './index.module.css';
 
@@ -17,20 +18,17 @@ class ProfilePage extends Component {
   static contextType = UserContext;
 
   componentDidMount() {
-    // console.log(this.props.match.params.userId);
     this.getProfile(this.props.match.params.userId);
   }
 
   getProfile = async (id) => {
-    const res = await fetch(`https://estatesbg.herokuapp.com/api/users/profile?_id=${id}`);
-    // console.log(res);
+    const res = await userService.getProfileInfo(id);
 
     if (!res.ok) {
       this.props.history.push('/error');
     }
 
     const user = await res.json();
-    // console.log(user);
 
     this.setState({
       email: user.email,
@@ -55,7 +53,6 @@ class ProfilePage extends Component {
     return (
       <Layout>
         <div className={styles.profile}>
-          {/* <img src="/assets/profile.png" alt="default user" /> */}
           <h3>User Info</h3>
           <div className={styles.flex}>
             <p>Email: </p>
@@ -66,7 +63,6 @@ class ProfilePage extends Component {
             <span>{myItems}</span>
           </div>
         </div>
-        {/* auth "guard" */}
         { this.context.loggedIn ? null : <Redirect to="/user/login" />}
       </Layout>
     );

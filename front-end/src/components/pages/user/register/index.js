@@ -5,6 +5,7 @@ import {
   Link, Redirect
 } from 'react-router-dom';
 import UserContext from '../../../../Context';
+import userService from '../../../../services/userService';
 
 class RegisterPage extends Component {
   constructor(props) {
@@ -25,14 +26,13 @@ class RegisterPage extends Component {
 
   handleChange = (event, type) => {
     const newState = {};
-    // console.log(event);
     newState[type] = event.target.value;
 
     this.setState(newState);
   };
 
   handleSubmit = async (event) => {
-    event.preventDefault(); // so page doesn't reload
+    event.preventDefault();
 
     const {
       email,
@@ -40,9 +40,6 @@ class RegisterPage extends Component {
       rePassword
     } = this.state;
 
-    // console.log(this.context);
-
-    // custom validations
     if (0 < email.length && !email.match(/^[a-zA-Z0-9.-]{6,}@\w+.(com|bg)$/)) {
       this.setState({
         emailError: true
@@ -83,41 +80,15 @@ class RegisterPage extends Component {
       });
     }
 
-    // request
-    try {
-      const promise = await fetch('https://estatesbg.herokuapp.com/api/users/register', {
-        method: 'POST',
-        body: JSON.stringify({
-          email,
-          password,
-          rePassword
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-
-      const authToken = promise.headers.get('Authorization'); // #rest-api/index.js
-      document.cookie = `auth-cookie=${authToken}`; // we save the token in the cookie (#rest-api/app-config),
-      // and when we log in, we'll already have the cookie in DevTools/Application 
-      const response = await promise.json();
-      // console.log(response);
-
-      // passwords match needed, so it doesn't log in w/o rePassword
-      if (response.email && authToken && rePassword === password) {
-        // console.log('Yay!');
-        this.context.logIn({
-          email: response.email,
-          id: response._id
-        });
-        this.props.history.push('/'); // if all good, we redirect to homePage
-      } else {
-        console.log('Error');
-      }
-
-    } catch (err) {
-      console.log('Error', err);
-    }
+    await userService.authenticate(
+      '/register',
+      { email, password, rePassword },
+      (user) => {
+        this.context.logIn(user);
+        this.props.history.push('/');
+      },
+      (err) => console.log('Error', err)
+    );
   };
 
   render() {

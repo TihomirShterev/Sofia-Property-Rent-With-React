@@ -5,6 +5,7 @@ import {
   Link, Redirect
 } from 'react-router-dom';
 import UserContext from '../../../../Context';
+import userService from '../../../../services/userService';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -22,21 +23,18 @@ class LoginPage extends Component {
 
   handleChange = (event, type) => {
     const newState = {};
-    // console.log(event);
     newState[type] = event.target.value;
 
     this.setState(newState);
   }
 
   handleSubmit = async (event) => {
-    event.preventDefault(); // so page doesn't reload
+    event.preventDefault();
 
     const {
       email,
       password
     } = this.state;
-
-    // console.log(this.context);
 
     if (!email || !password) {
       this.setState({
@@ -48,44 +46,23 @@ class LoginPage extends Component {
       });
     }
 
-    try {
-      const promise = await fetch('https://estatesbg.herokuapp.com/api/users/login', {
-        method: 'POST',
-        body: JSON.stringify({
-          email,
-          password
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-
-      const authToken = promise.headers.get('Authorization'); // #rest-api/index.js
-      document.cookie = `auth-cookie=${authToken}`; // we save the token in the cookie (#rest-api/app-config)
-      // and when we log in, we'll already have the cookie in DevTools/Application 
-      const response = await promise.json();
-      // console.log(response);
-
-      if (response.email && authToken) {
-        // console.log('Yay!');
+    await userService.authenticate(
+      '/login',
+      { email, password },
+      (user) => {
         this.setState({
           invalidInputError: false
         });
-        this.context.logIn({
-          email: response.email,
-          id: response._id
-        });
-        this.props.history.push('/'); // if all good, we redirect to homePage
-      } else {
+        this.context.logIn(user);
+        this.props.history.push('/');
+      },
+      (err) => {
         this.setState({
           invalidInputError: true
         });
-        // console.log('Error');
+        console.log('Error', err)
       }
-
-    } catch (err) {
-      console.log('Error', err);
-    }
+    );
   };
 
   render() {
