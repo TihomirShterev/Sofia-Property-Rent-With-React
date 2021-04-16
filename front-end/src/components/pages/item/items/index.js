@@ -3,6 +3,7 @@ import Item from '../../../common/item';
 import Layout from '../../../common/layout';
 import ErrorBoundary from '../../../common/ErrorBoundary';
 import styles from './index.module.css';
+import itemService from '../../../../services/itemService';
 
 class ItemsPage extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class ItemsPage extends Component {
   }
 
   getItems = async () => {
-    const promise = await fetch('https://estatesbg.herokuapp.com/api/items');
+    const promise = await itemService.getAll();
     const items = await promise.json();
 
     this.setState({
@@ -39,7 +40,6 @@ class ItemsPage extends Component {
   }
 
   render() {
-    // console.log(this.state.items);
     const { items } = this.state;
 
     return (

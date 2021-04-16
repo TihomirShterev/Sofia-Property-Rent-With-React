@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import itemService from '../../../../services/itemService';
 import Layout from '../../../common/layout';
 import styles from './index.module.css';
 
@@ -10,16 +11,10 @@ const DetailsPage = () => {
   const [authorEmail, setAuthorEmail] = useState('');
   const params = useParams();
 
-  // useCallBack is needed (so that there's no warning thrown in the console), because:
-  // 1) getDetails is declared out of useEffect and async is used
-  // 2) we don't want to create a new fn everytime, but to use it since it's declared
   const getDetails = useCallback(async () => {
     const id = params.itemId;
-    // console.log(id);
-    const res = await fetch(`https://estatesbg.herokuapp.com/api/items/details?_id=${id}`);
-    // console.log(res);
+    const res = await itemService.getOne(id);
     const item = await res.json();
-    // console.log(item);
     setTitle(item.title);
     setImageURL(item.imageURL);
     setDescription(item.description);

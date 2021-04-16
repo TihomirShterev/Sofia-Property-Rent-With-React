@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Layout from '../../../common/layout';
 import styles from './index.module.css';
-import getCookie from '../../../../utils/cookie';
+import itemService from '../../../../services/itemService';
 
 const CreatePage = () => {
   const [title, setTitle] = useState('');
@@ -16,7 +16,6 @@ const CreatePage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // TODO: validations
     if (title.length < 5) {
       setTitleError(true);
     } else {
@@ -36,23 +35,7 @@ const CreatePage = () => {
     }
 
     if (title.length >= 5 && imageURL && description.length >= 10) {
-      // const promise = await fetch('https://estatesbg.herokuapp.com/api/items/create', {
-      await fetch('https://estatesbg.herokuapp.com/api/items/create', {
-        method: 'POST',
-        body: JSON.stringify({
-          title,
-          imageURL,
-          description
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': getCookie('auth-cookie')
-        }
-      });
-
-      // const data = await promise.json();
-      // console.log(data);
-
+      await itemService.create({ title, imageURL, description });
       history.push('/item');
     }
   };
@@ -70,7 +53,6 @@ const CreatePage = () => {
       });
 
     const file = await res.json();
-    // console.log(file);
     setImageURL(file.secure_url);
   };
 
@@ -129,7 +111,6 @@ const CreatePage = () => {
               </p>
             </div>
             <div className={styles["new-item-buttons"]}>
-              {/* <button type="button" className={styles.cancel} href="/">Back</button> */}
               <button className={styles["create-new-item-btn"]} type="submit">Create</button>
             </div>
           </div>

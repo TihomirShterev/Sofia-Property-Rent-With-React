@@ -2,12 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react';
 import styles from './index.module.css';
 import Layout from '../../common/layout';
 import Item from '../../common/item';
+import itemService from '../../../services/itemService';
 
 const HomePage = () => {
   const [items, setItems] = useState([]);
 
   const getItems = useCallback(async () => {
-    const promise = await fetch('https://estatesbg.herokuapp.com/api/items');
+    const promise = await itemService.getAll();
     const items = await promise.json();
 
     let itemsCopy = items.slice(items.length - 3, items.length);
