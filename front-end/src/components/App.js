@@ -20,7 +20,6 @@ class App extends Component {
   }
 
   logOut = () => {
-    // clear cookie
     document.cookie = 'auth-cookie= ; expires = Thu, 01 Jan 1970 00:00:00 HMT';
 
     this.setState({
@@ -31,15 +30,13 @@ class App extends Component {
 
   componentDidMount() {
     const token = getCookie('auth-cookie');
-    // console.log(token);
 
     if (!token) {
       this.logOut();
       return;
     }
 
-    // to keep the cookie after page reload
-    fetch('https://estatesbg.herokuapp.com/api/users/verify', {
+    fetch('http://localhost:3001/api/users/verify', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -70,8 +67,6 @@ class App extends Component {
     } = this.state;
 
     if (loggedIn === null) {
-      // this is done so when we're logged
-      // it doesn't show first guest nav and later jumps to loginPage
       <div>Loading....</div>
     }
 

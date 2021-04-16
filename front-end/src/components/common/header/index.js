@@ -11,7 +11,6 @@ class Header extends Component {
 
   logOut = () => {
     this.context.logOut();
-    // window.location.href = 'http://localhost:3000/'; // another way to redirect
   }
 
   render() {
@@ -19,7 +18,6 @@ class Header extends Component {
       loggedIn,
       user
     } = this.context;
-    // console.log(this.context);
 
     return (
       <header>
@@ -32,7 +30,6 @@ class Header extends Component {
               {loggedIn
                 ? <>
                   <li>
-                    {/* if there's user, we place id*/}
                     <Link to={`/user/profile/${user && user.id}`}>PROFILE</Link>
                   </li>
                   <li>
