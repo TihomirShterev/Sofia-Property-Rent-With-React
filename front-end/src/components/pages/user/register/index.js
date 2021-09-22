@@ -40,7 +40,7 @@ class RegisterPage extends Component {
       rePassword
     } = this.state;
 
-    if (0 < email.length && /^[a-zA-Z0-9.-]{6,}@\w+.(com|bg)$/.test(email) === false) {
+    if (0 < email.length && /\S+@\S+\.\S+/.test(email) === false) {
       this.setState({
         emailError: true
       });
@@ -80,7 +80,7 @@ class RegisterPage extends Component {
       });
     }
 
-    let hasNoError = /^[a-zA-Z0-9.-]{6,}@\w+.(com|bg)$/.test(email) && password.length >= 6 && rePassword && rePassword === password
+    let hasNoError = /\S+@\S+\.\S+/.test(email) && password.length >= 6 && rePassword && rePassword === password
 
     if (hasNoError) {
       await userService.authenticate(
