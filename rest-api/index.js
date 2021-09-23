@@ -1,27 +1,19 @@
 global.__basedir = __dirname;
 require('dotenv').config();
-const dbConnector = require('./config/db');
-const apiRouter = require('./router');
 const cors = require('cors');
-const { errorHandler } = require('./utils');
+const dbConnector = require('./config/db');
+const router = require('./router');
+const { errorHandler, notFound } = require('./utils');
 
 dbConnector()
   .then(() => {
-    const config = require('./config/config');
-
     const app = require('express')();
     require('./config/express')(app);
-
-    app.use(cors({
-      // origin: config.origin,
-      // credentials: true,
-      exposedHeaders: 'Authorization'
-    }));
-
-    app.use('/api', apiRouter);
-
+    app.use(cors({ exposedHeaders: 'Authorization' }));
+    app.use('/api', router);
+    app.use(notFound);
     app.use(errorHandler);
-
-    app.listen(config.port, console.log(`Listening on port ${config.port}!`));
+    const { port } = require('./config/config');
+    app.listen(port, console.log(`Listening on port ${port}!`));
   })
   .catch(console.error);
