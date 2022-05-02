@@ -1,4 +1,5 @@
-const url = 'https://estatesbg.herokuapp.com/api/users';
+const url = 'http://localhost:3001/api/users';
+// const url = 'https://estatesbg.herokuapp.com/api/users';
 
 const userService = {
   authenticate: async (path, data, onSuccess, onFailure) => {

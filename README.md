@@ -2,8 +2,6 @@
 
 My project is a property renting platform. Its goal is to be user-friendlier, more reliable, more affordable and to provide better and more services than already existing platforms of the same kind. 
 
-#### Currently hosted on Heroku at https://estatesbg.herokuapp.com/
-
 ## Tech Stack
 
 - React.js

@@ -1,6 +1,7 @@
 import getCookie from "../utils/cookie";
 
-const url = 'https://estatesbg.herokuapp.com/api/items';
+const url = 'http://localhost:3001/api/items';
+// const url = 'https://estatesbg.herokuapp.com/api/items';
 
 const itemService = {
   create: async (data) => {

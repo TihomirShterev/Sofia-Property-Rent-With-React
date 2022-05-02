@@ -1,3 +1,4 @@
+// rename to AuthProvider and move to /src
 import React, { Component } from 'react';
 import UserContext from '../Context';
 import getCookie from '../utils/cookie';
@@ -36,7 +37,8 @@ class App extends Component {
       return;
     }
 
-    fetch('https://estatesbg.herokuapp.com/api/users/verify', {
+    fetch('http://localhost:3001/api/users/verify', {
+      // fetch('https://estatesbg.herokuapp.com/api/users/verify', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -48,8 +50,8 @@ class App extends Component {
         return promise.json();
       })
       .then(res => {
-        // console.log(res);
         if (res.status) {
+          console.log('verified');
           this.logIn({
             email: res.user.email,
             id: res.user._id
