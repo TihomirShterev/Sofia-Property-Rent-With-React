@@ -40,7 +40,7 @@ class RegisterPage extends Component {
       rePassword
     } = this.state;
 
-    if (0 < email.length && /\S+@\S+\.\S+/.test(email) === false) {
+    if (0 < email.length && /^[\w.]+@[a-z]+\.[a-z]+$/.test(email) === false) {
       this.setState({
         emailError: true
       });
@@ -80,7 +80,7 @@ class RegisterPage extends Component {
       });
     }
 
-    let hasNoError = /\S+@\S+\.\S+/.test(email) && password.length >= 6 && rePassword && rePassword === password
+    let hasNoError = /^[\w.]+@[a-z]+\.[a-z]+$/.test(email) && password.length >= 6 && rePassword && rePassword === password
 
     if (hasNoError) {
       await userService.authenticate(
@@ -174,7 +174,7 @@ class RegisterPage extends Component {
 
           </fieldset>
         </form>
-        { this.context.loggedIn ? <Redirect to="/" /> : null}
+        {this.context.loggedIn ? <Redirect to="/" /> : null}
       </Layout>
     );
   };
